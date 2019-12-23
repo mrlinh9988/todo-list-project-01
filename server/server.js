@@ -21,11 +21,7 @@ server.use((req, res, next) => {
     next();
 })
 
-server.get('/', (req, res, next) => {
 
-    res.sendFile(path.join(__dirname, '/public/html/index.html'))
-
-})
 
 server.get('/services', (req, res, next) => {
 
@@ -55,6 +51,12 @@ server.get('/login', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/public/html/login.html'))
 })
 
+server.get('/', (req, res, next) => {
+
+    res.sendFile(path.join(__dirname, '/public/html/index.html'))
+
+})
+
 // login logic
 server.post('/login', (req, res, next) => {
     if (req.body.username === 'admin' && req.body.password === '12345') {
@@ -65,6 +67,7 @@ server.post('/login', (req, res, next) => {
         // })
         // console.log('Dang nhap thanh cong');
         res.redirect('/')
+ 
     } else {
         isLogin = false;
         // res.json({
@@ -72,6 +75,7 @@ server.post('/login', (req, res, next) => {
         //     message: 'ĐĂNG NHẬP THẤT BẠI'
         // })
         res.redirect('login')
+
         // console.log('Dang nhap that bai');
     }
 })
