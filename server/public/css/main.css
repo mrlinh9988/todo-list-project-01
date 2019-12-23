@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* div {
+    border: 1px solid black;
+   
+} */
+
+
+.block-header {
+    background: url('../imgs/op1-606275.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+.transparent {
+    background-color: transparent;
+}
+
+.header{
+    width: 100%;
+    min-height: 150px;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 5;
+}
+
+/* .block-header .content{
+    height: 850px;
+} */
+.content{
+    height: 850px;
+}
+
+.block-header .container {
+    height: 100%;
+}
+
+/* /block-header */
+
+.block-services {
+    background: url('../imgs/op1-516664.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* /block-services  */
+
+.logo {
+    font-size: 35px;
+}
+
+.content {
+    font-size: 30px;
+}
+
+.content p {
+    background-color: rgba(0,0,0,0.4);
+}
+
+.footer-01 {
+    min-height: 400px;
+    background-color: #4bcaff;
+}
+
+.line-services {
+    height: 2px;
+    width: 50px;
+    margin-bottom: 30px;
+}
+
+.services-text p {
+    font-size: 30px;
+}
+
+.content-footer {
+  padding: 80px 0;
+}
+.name-item {
+    font-size: 20px;
+}
+
+/* .content-footer {
+    padding: 80px 0; 
+} */
+.font-14 {
+    font-size: 14px;
+}
+
+.block2 .header{
+    min-height: 150px;
+}
+
+/* block2  */
+.block2 {
+    padding: 30px 0;
+    background-color: rgba(235, 230, 230, 0.6);
+}
+.block2-items {
+    padding: 30px 0;
+}
+
+.products .product-item img{
+    padding-right: -10px;
+    width: 100%;
+    height: 260px;
+    /* background-image: url('../imgs/op1.jpg'); */
+    background-size: cover;
+}
+
+.products .product-item {
+    position: relative;
+}
+
+.products .product-item .filter {
+    width: 100%;
+    height: 260px;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.products .product-item:hover .filter{
+    opacity: 1;
+}
+
+.product-item .filter:hover .plus {
+    display: block;
+}
+
+.plus {
+    color: white;
+    display: none;
+    font-size: 40px;
+    color: rgb(223, 217, 217);
+}
+
+/* block3 */
+
+.block3-content {
+    padding: 80px 0;
+}
+
+.left-content {
+    height: 320px;
+}
+/* .left-content p {
+    padding: 5px 0;
+} */
+
+/* /block4 */
+
+.block4 {
+    padding: 80px 0;
+    color: rgb(233, 232, 232);
+    background-color: #4bcaff;
+}
+
+.block4 .twitter-logo {
+    font-size: 30px;
+}
+
+.block4 .description {
+    font-size: 25px;
+    color: rgb(228, 228, 228);
+}
+
+/* block5 */
+
+.block5 {
+    position: relative;
+    padding: 80px 0;
+    background: url('../imgs/op-606270.jpg');
+    /* background-position: 1px; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.block5 .icons {
+    font-size: 35px;
+}
+
+.block5 .filter-block5 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(66, 61, 61, 0.6);
+    z-index: 0;
+}
+
+.block5 .icons i:hover {
+    transition: 0.2s;
+    color: #4bcaff;
+    border-color: #4bcaff !important;
+}
+
+/* block6  */
+.block6 {
+    padding: 80px 0;
+    color: rgb(66, 66, 66);
+}
+.block6 .quote-logo{
+    font-size: 25px;
+}
+
+.block6 .description {
+    font-size: 22px;
+}
+
+.block6 .blue-name {
+    font-size: 17px;
+    color: #4bcaff;
+}
+
+
+/* block7  */
+.block7 {
+    padding: 80px 0;
+    background: url('../imgs/op-589333.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.block7 .block7-text {
+    font-size: 15px;
+}
+
+.background-transparent {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.block7 .info {
+    height: 80px;
+    font-size: 16px;
+}
+
+.block7 .message {
+    background: transparent;
+    border-color: white;
+    border-radius: 0;
+}
+
+.block7 .btn {
+    font-size: 15px;
+    width: 250px;
+    padding: 10px 0;
+    background-color: #4bcaff;
+}
+
+.block7 input:hover{
+    border-color: #4bcaff !important;
+}
+
+.block7 textarea:hover {
+    border-color: #4bcaff !important;
+}
+
+/* block8 */
+.block8 {
+    background-color: #353f47;
+}
+.breadcrumb {
+    background: transparent;
+    color: #515f67
+}
+
+.block8 .quote-logo {
+    color: #515f67
+}
+
+.big-text {
+    cursor: pointer;
+    
+}
+
+.big-text:hover {
+    cursor: pointer;    
+}
+
+.btn-message:hover {
+    background-color: transparent !important;
+    transition: 0.2s;
+    color: #4bcaff !important;
+}
