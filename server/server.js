@@ -59,19 +59,19 @@ server.get('/login', (req, res, next) => {
 server.post('/login', (req, res, next) => {
     if (req.body.username === 'admin' && req.body.password === '12345') {
         isLogin = true;
-        res.json({
-            status: 200,
-            message: 'ĐĂNG NHẬP THÀNH CÔNG'
-        })
+        // res.json({
+        //     status: 200,
+        //     message: 'ĐĂNG NHẬP THÀNH CÔNG'
+        // })
         // console.log('Dang nhap thanh cong');
-        // res.redirect('/')
+        res.redirect('/')
     } else {
         isLogin = false;
-        res.json({
-            status: 400,
-            message: 'ĐĂNG NHẬP THẤT BẠI'
-        })
-        // res.redirect('login')
+        // res.json({
+        //     status: 400,
+        //     message: 'ĐĂNG NHẬP THẤT BẠI'
+        // })
+        res.redirect('login')
         // console.log('Dang nhap that bai');
     }
 })
