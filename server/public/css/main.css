@@ -296,3 +296,22 @@
     transition: 0.2s;
     color: #4bcaff !important;
 }
+
+
+/* scroll to top */
+.scrollTop {
+    position: fixed;
+    right: 10%;
+    bottom: 10px;
+    background-color: rgba(231, 59, 59, 0.8);
+    padding: 20px;
+    opacity: 0;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out 0s !important;
+}
+  
+.scrollTop a {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+}
