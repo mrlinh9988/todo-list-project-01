@@ -9,47 +9,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+    
+    <link type="text/css" rel="stylesheet" href="/public/plugin/pagination/simplePagination.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/public/plugin/pagination/jquery.simplePagination.js"></script>
 
 </head>
 
 <body>
-    <!-- <div class="header bg-dark" style="height: 800px;">
-        <div class="container">
-            <nav class="navbar h-100 navbar-expand-lg navbar-light">
-                <a class="navbar-brand text-light" href="#">mrLinh</i></a>
-                <button class="navbar-toggler border-light" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-bars text-light"></i>
-                </button>
-    
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav text-right">
-                        <li class="nav-item ">
-                            <a class="nav-link text-info mx-0 font-weight-bold" href="/">HOME <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light mx-2" href="/services">SERVICES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light mx-2" href="#">FEATURES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light mx-2" href="#">PORTFOLIO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light mx-2" href="#">CONTACT</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <div class="content d-flex flex-column justify-content-center align-items-center">
-            <p class="text-light px-3">SERVICES PAGE</p>
-            <p class="text-light px-3">BAC NINH</p class="bg-dark">
-        </div>
-    </div> -->
 
     <div class=" bg-dark ">
 
@@ -92,17 +67,123 @@
             <p class="text-light px-3">FEATURES PAGE</p>
         </div>
         <!-- /content block-header  -->
+
+
+
     </div>
     <!-- /block-header -->
+    <div class="block2">
+        <div class="container">
+            <nav class="navbar h-100 navbar-expand-lg navbar-light px-0 py-5">
+                <div class="services-text ">
+                    <p class="text-dark mb-0 m-auto big-text">SERVICES</p>
+                    <div class="line-services bg-dark mb-0"></div>
+                </div>
+                <button class="navbar-toggler border-dark" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars text-dark"></i>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <!-- <ul class="navbar-nav text-right">
+                        <li class="nav-item ">
+                            <a class="nav-link text-info mx-0 font-weight-bold" href="#">HOME <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark mx-2 font-weight-bold" href="#">SERVICES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark mx-2 font-weight-bold" href="#">FEATURES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark mx-2 font-weight-bold" href="#">PORTFOLIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark mx-2 font-weight-bold" href="#">CONTACT</a>
+                        </li>
+                    </ul> -->
+                    <div id="paging"></div>
+                </div>
+            </nav>
+            <div class="content-block2">
+                <div class="products mb-4">
+                    <div class="row" id="content">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- <div id="loading-custom-overlay"></div> -->
+
+            <!-- <div class="load-more-wrapper">
+                <button class="btn btn-outline-secondary load-more-btn mx-auto d-flex justify-content-center">Xem thêm</button>
+            </div> -->
+        </div>
+    </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+
+
+<script>
+
+    var pageNumber = 1;
+    var disableLoadMore = false;
+
+    $(function () {
+        loadPage(pageNumber);
+    });
+
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var windowHeight = $(this).height();
+        var documentHeight = $(document).height();
+
+
+        if ((windowHeight + scrollTop) >= (documentHeight - 200)) {
+            if (!disableLoadMore) {
+                pageNumber++;
+                loadPage(pageNumber);
+            }
+            // !disableLoadMore && loadPage(pageNumber)
+        }
+    })
+
+    function loadPage(pageNumber) {
+        if (!pageNumber) {
+            pageNumber = 1;
+        }
+
+        $.ajax({
+            url: '/api/product?page=' + pageNumber,
+            method: 'get'
+        }).then(data => {
+
+            // $('#content').html('');
+            for (let i = 0; i < data.length; i++) {
+
+                const element = data[i];
+                $('#content').append(`
+                        <div class="col-md-3 col-sm-12 mb-4">
+                            <div class="product-item">
+                                <img src="${element.avatar}" class="product position-relative" alt="">
+                                <div class="filter d-flex justify-content-center align-items-center position-absolute">
+                                    <span class="plus position-absolute" style="font-size: 20px;">${element.title}</span>
+                                </div>
+                            </div>
+                            <span class="title-product mx-5 d-flex align-items-center justify-content-center font-weight-bold">${element.title}</span>
+                        </div>
+                `)
+            }
+            // console.log(data.length);
+
+            if (data.length === 0) {
+                disableLoadMore = true;
+            }
+        })
+    }
+</script>
 
 </html>
