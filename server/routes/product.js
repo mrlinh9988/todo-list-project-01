@@ -22,10 +22,12 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
+    
     let id = req.params.id;
+    console.log(id);
     db.findById(id)
         .then(data => {
-            // console.log(data);
+            console.log(data);
             res.json(data)
         }).catch(err => {
             console.log(err);
@@ -45,16 +47,20 @@ router.get('/get/count', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let title = req.body.title;
-    console.log(req.body.title);
     db.create({
         title: title,
         createdAt: d.toLocaleTimeString() + ' ' + newDate.join('/')
     })
         .then(data => {
-            console.log(data);
-            res.json({
-                message: 'Add data success'
+            db.find({
+                _id: data._id
+            }).then(result => {
+                res.json({
+                    message: 'Add data success',
+                    data: result
+                })
             })
+            
         }).catch(err => {
             console.log(err);
         })

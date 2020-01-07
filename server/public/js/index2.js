@@ -32,14 +32,15 @@ function loadPage(pageNumber) {
             const element = data[i];
             $('#content').append(`
                     <tr id="${element._id}">
-                        <td colspan="3">${i + 1}</td>
-                        <td colspan="2" class="title">${element.title}</td>
+                        
+                        <td colspan="3" class="title">${element.title}</td>
 
-                         <td>
+                         <td colspan="2">
                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="updateData(this, '${element._id}', '${element.title}')"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit" name="edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="deleteData(this, '${element._id}')" ><i class="material-icons"
                                 data-toggle="tooltip" title="Delete" name="delete">&#xE872;</i></a>
+                            <a href="#detailEmployeeModal" data-toggle="modal" onclick="detailData('${element._id}')" ><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 `)
@@ -60,8 +61,8 @@ function loadPagination(totalRecord) {
         onInit: function () {
 
         },
-        prevText: '<i class="glyphicon glyphicon-chevron-left"></i>',
-        nextText: '<i class="glyphicon glyphicon-chevron-right"></i>',
+        prevText: '<i class="fas fa-chevron-left"></i>',
+        nextText: '<i class="fas fa-chevron-right"></i>',
         currentPage: 1
     });
 }
@@ -78,9 +79,23 @@ function addData() {
             title: $('#add-content').val()
         },
         dataType: 'json'
-    }).then(data => {
-        console.log(data);
+    }).then(res => {
+        $('#add-content').val('')
+        console.log(res.data[0].title);
         $('#addEmployeeModal').modal('hide');
+        $('#content').append(`
+                    <tr id="${res.data[0]._id}">
+                      
+                        <td colspan="3" class="title">${res.data[0].title}</td>
+                        <td colspan="2" >
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="updateData(this, '${res.data[0]._id}', '${res.data[0].title}')"><i class="material-icons"
+                                data-toggle="tooltip" title="Edit" name="edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="deleteData('${res.data[0]._id}')" ><i class="material-icons"
+                                data-toggle="tooltip" name="detail">&#xE872;</i></a>
+                            <a href="#detailEmployeeModal" data-toggle="modal" onclick="detailData('${res.data[0]._id}')" ><i class="fas fa-info-circle"></i></a>
+                        </td>
+                    </tr>
+                `)
     }).catch(err => console.log(err))
 
     // $('#btn-submit-add').off('click').on('click', function () {
@@ -132,19 +147,15 @@ function deleteData(target, id) {
 
 function detailData(id) {
 
-    $('#myModalLabel').html('Id: ' + id)
+    console.log(id);
     $.ajax({
         url: '/api/product/' + id,
         method: 'get'
     }).then(data => {
-        // console.log(moment(data.createdAt).get('date'));
-        // console.log(moment(data.createdAt).get('month') + 1);
-        // console.log(moment(data.createdAt).get('year'));
-        // console.log(moment(data.createdAt).get('hour'));
-        // console.log(moment(data.createdAt).get('minute'));
-        $('#detail-content').html(`
+        console.log(data);
+        $('#content-detail').html(`
             <tr>
-                <td>${data.title}</td>
+                <td colspan="2">${data.title}</td>
                 <td>${data.createdAt}</td>
             </tr>
         `)
