@@ -73,28 +73,62 @@
 </body>
 <script>
 
+	function getArrCookie() {
+		let arrCookie = document.cookie.split(';')
+		return arrCookie.map(function (e) {
+			let cookie = e.split('=');
+			return {
+				key: cookie[0],
+				value: cookie[1]
+			}
+		})
+	}
+
+	function cookie(key) {
+		var arrCookie = getArrCookie();
+		return arrCookie.find(function (e) {
+			return e.key === key;
+		})
+	}
+
+	function setCookie(key, value, timeExpire) {
+		let date = new Date();
+		date.setTime(timeExpire * 1000 * 60 * 60 * 24 + date.getTime());
+
+		console.log(date);
+
+		return document.cookie = `${key}=${value}`
+	}
+
 	$('#login-button').click(function () {
 		let data = {
 			username: $('#username').val(),
 			password: $('#password').val()
 		}
-		console.log(data);
 		$.ajax({
 			url: '/login',
 			method: 'post',
 			data: data,
 			dataType: 'json'
 		}).then(res => {
+			console.log(res.token);
 			if (res.status === 200) {
-				console.log('success');
-				window.location.href = 'http://127.0.0.1:3000/'
+
+				setCookie('token', res.token, 1)
+				// window.location.href = 'http://127.0.0.1:3000/'
 			} else {
 				alert('Login fail!')
 				console.log('fail');
 			}
-			
+
 		}).catch(err => console.log(err))
 	})
+
+
+	// setCookie('linh', 'deptrai', 1)
+	// console.log(getArrCookie());
+	console.log(cookie(' token'));
+	// console.log(cookie("SL_G_WPT_TO"));
 </script>
 
 </html>

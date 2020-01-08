@@ -6,6 +6,8 @@ const fs = require('fs');
 var port = process.env.PORT || 3000;
 var productRoute = require('./routes/product');
 var loginRoute = require('./routes/login')
+var jwt = require('jsonwebtoken');
+var logInMiddleware = require('./middlewares/checkLogin')
 
 server.use('/public', express.static(path.join(__dirname, '/public')))
 server.use(express.urlencoded({ extended: true }))
@@ -60,6 +62,30 @@ server.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/public/html/index2.html'))
 
 })
+
+// server.post('/', (req, res, next) => {
+//     let username = req.body.username;
+//     let password = req.body.password;
+//     let data = {
+//         username: username,
+//         password: password
+//     }
+
+//     if (username === 'linh' && password === '123') {
+//         jwt.sign(data, 'linh', { expiresIn: '1h' }, function (err, token) {
+//             res.json(token)
+//         });
+//     }
+
+// })
+
+// server.get('/token', logInMiddleware.checkLogin, (req, res, next) => {
+    
+//     res.json({
+//         message: 'Dang nhap thanh cong'
+//     })
+
+// })
 
 // login logic
 
