@@ -36,6 +36,8 @@ router.post('/', (req, res, next) => {
                         status: 200,
                         token: token
                     })
+
+                    console.log('token: 1', token);
                 })
 
                 // res.json({

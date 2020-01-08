@@ -4,11 +4,13 @@ const path = require('path');
 const fs = require('fs');
 // var isLogin = false;
 var port = process.env.PORT || 3000;
+var cookieParser = require('cookie-parser')
 var productRoute = require('./routes/product');
 var loginRoute = require('./routes/login')
 var jwt = require('jsonwebtoken');
 var logInMiddleware = require('./middlewares/checkLogin')
 
+server.use(cookieParser())
 server.use('/public', express.static(path.join(__dirname, '/public')))
 server.use(express.urlencoded({ extended: true }))
 
@@ -59,6 +61,7 @@ server.get('/contact', (req, res, next) => {
 
 server.get('/', (req, res, next) => {
 
+    console.log(req.cookies.token);
     res.sendFile(path.join(__dirname, '/public/html/index2.html'))
 
 })
