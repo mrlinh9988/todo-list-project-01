@@ -10,8 +10,11 @@
 
 // ==============================================================================
 // PAGINATION
+var hash = window.location.hash || "#page-1";
 
-loadPage(1);
+hash = hash.match(/^#page-(\d+)$/);
+var num = parseInt(hash[0]);
+loadPage(num);
 
 $.ajax({
     url: '/api/product/get/count',
@@ -53,7 +56,7 @@ function loadPage(pageNumber) {
 function loadPagination(totalRecord) {
     $('#paging').pagination({
         items: totalRecord,
-        itemsOnPage: 15,
+        itemsOnPage: 10,
         cssStyle: 'light-theme',
         onPageClick: function (pageNumber, event) {
             loadPage(pageNumber);
@@ -97,6 +100,13 @@ function addData() {
                     </tr>
                 `)
     }).catch(err => console.log(err))
+
+    $.ajax({
+        url: '/api/product/get/count',
+        method: 'get'
+    }).then(totalRecord => {
+        loadPagination(totalRecord)
+    })
 
     // $('#btn-submit-add').off('click').on('click', function () {
     //     console.log('ok');

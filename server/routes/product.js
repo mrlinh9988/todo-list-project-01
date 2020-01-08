@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
     var start = (page - 1) * 10;
     db.find()
         .skip(start)
-        .limit(15)
+        .limit(10)
         .exec()
         .then(data => {
             // console.log(data);
