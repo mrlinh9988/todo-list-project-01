@@ -14,6 +14,7 @@ router.post('/', (req, res, next) => {
 
     userModel.auth(username, password)
         .then(result => {
+            // console.log('user: ',result[0]);
 
             if (result.length === 0) {
                 // res.json({
@@ -28,23 +29,24 @@ router.post('/', (req, res, next) => {
             } else {
                 let data = {
                     username: result[0].username,
-                    password: result[0].password
+                    password: result[0].password,
+                    type: result[0].type
                 }
-                
-                jwt.sign(data, 'linh', { expiresIn: '1h' }, (err, token) => {
+
+                jwt.sign(data, 'linh', { expiresIn: "1 days" }, (err, token) => {
                     res.json({
                         status: 200,
                         token: token
                     })
 
-                    console.log('token: 1', token);
+
                 })
 
                 // res.json({
                 //     status: 200,
                 //     message: 'Login success'
                 // })
-            }   
+            }
         })
         .catch(err => {
             console.log('fail');

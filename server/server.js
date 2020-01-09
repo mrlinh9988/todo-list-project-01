@@ -59,10 +59,15 @@ server.get('/contact', (req, res, next) => {
 })
 
 
-server.get('/', (req, res, next) => {
+server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
+    // console.log('res.locals: ', res.locals);
+    // res.sendFile(path.join(__dirname, '/public/html/index2.html'))
 
-    console.log(req.cookies.token);
-    res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+    if (res.locals === 1 || res.locals === 3 || res.locals === 0) {
+        res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+    }
+    // console.log(req.cookies.token);
+
 
 })
 
@@ -83,7 +88,7 @@ server.get('/', (req, res, next) => {
 // })
 
 // server.get('/token', logInMiddleware.checkLogin, (req, res, next) => {
-    
+
 //     res.json({
 //         message: 'Dang nhap thanh cong'
 //     })

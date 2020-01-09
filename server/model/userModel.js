@@ -4,8 +4,14 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    type: {
+        type: Number,
+        default: 3
+    }
+
 }, {
+
     collection: 'user'
 });
 
@@ -13,7 +19,7 @@ var UserSchema = new Schema({
 var User = mongoose.model('user', UserSchema);
 
 // User.create({
-//     username: 'linh1',
+//     username: 'linh',
 //     password: '123'
 // }).then(data => {
 //     console.log('Create success');
@@ -24,7 +30,6 @@ function auth(username, password) {
         $and : [{ username: username }, { password: password }]
     });
 }
-
 
 module.exports = {
     auth

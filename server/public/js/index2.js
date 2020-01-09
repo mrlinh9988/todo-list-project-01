@@ -5,11 +5,29 @@
 // })
 
 // BY KAREN GRIGORYAN
+// console.log(getArrCookie());
+// getArrCookie().pop()
 
-
+function getArrCookie() {
+    let arrCookie = document.cookie.split('; ')
+    return arrCookie.map(function (e) {
+        let cookie = e.split('=');
+        return {
+            key: cookie[0],
+            value: cookie[1]
+        }
+    })
+}
 
 // ==============================================================================
 // PAGINATION
+
+$('#btn-login').click(function () {
+    window.location.href = '/login'
+});
+
+
+
 var hash = window.location.hash || "#page-1";
 
 hash = hash.match(/^#page-(\d+)$/);
@@ -119,10 +137,10 @@ function addData() {
 function updateData(target, id, title) {
     //$('#updateModalLabel').html('Id: ' + id)
     title = $('#' + id).find('.title').html();
-    console.log(title);
+    // console.log(title);
     $('#update-content').val(title)
 
-    console.log($('#update-content').val());
+    // console.log($('#update-content').val());
     // $('#updateModal').modal('show');
     $('#btn-submit-update').off('click').on('click', function () {
 
@@ -134,8 +152,13 @@ function updateData(target, id, title) {
             },
             dataType: 'json'
         }).then(res => {
-            $(target).parent().parent().find('.title').html(res.data.title)
-            $('#editEmployeeModal').modal('hide')
+            if (res.status) {
+                alert(res.message)
+            } else {
+                $(target).parent().parent().find('.title').html(res.data.title)
+                $('#editEmployeeModal').modal('hide')
+            }
+
             // $('#' + id).find('.title').html(res.data.title)
 
         }).catch(err => console.log(err))
@@ -147,10 +170,14 @@ function deleteData(target, id) {
         $.ajax({
             url: '/api/product/' + id,
             method: 'delete'
-        }).then(data => {
-            $(target).parent().parent().remove();
-            $('#deleteEmployeeModal').modal('hide');
-            console.log(data);
+        }).then(res => {
+            if (res.status) {
+                alert(res.message)
+            } else {
+                $(target).parent().parent().remove();
+                $('#deleteEmployeeModal').modal('hide');
+            }
+
         }).catch(err => console.log(err))
     })
 }

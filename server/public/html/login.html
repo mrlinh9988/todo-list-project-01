@@ -72,6 +72,7 @@
 	</div>
 </body>
 <script>
+	getArrCookie()
 
 	function getArrCookie() {
 		let arrCookie = document.cookie.split(';')
@@ -100,22 +101,27 @@
 		return document.cookie = `${key}=${value}`
 	}
 
+	// function deleteCookie(key){ 
+	// 	console.log();
+	// 	// return document.cookie = `${key}=`
+	// }
+
 	$('#login-button').click(function () {
 		let data = {
 			username: $('#username').val(),
 			password: $('#password').val()
 		}
+		// console.log(data);
 		$.ajax({
 			url: '/login',
 			method: 'post',
 			data: data,
 			dataType: 'json'
 		}).then(res => {
-			console.log(res.token);
+			// console.log(res);
 			if (res.status === 200) {
-
 				setCookie('token', res.token, 1)
-				// window.location.href = 'http://127.0.0.1:3000/'
+				window.location.href = 'http://localhost:3000/'
 			} else {
 				alert('Login fail!')
 				console.log('fail');
