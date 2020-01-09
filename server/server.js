@@ -65,6 +65,7 @@ server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
 
     if (res.locals === 1 || res.locals === 3 || res.locals === 0) {
         res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+        
     }
     // console.log(req.cookies.token);
 

@@ -31,7 +31,9 @@ $('#btn-login').click(function () {
 var hash = window.location.hash || "#page-1";
 
 hash = hash.match(/^#page-(\d+)$/);
-var num = parseInt(hash[0]);
+
+var num = parseInt(hash[1]);
+console.log(num);
 loadPage(num);
 
 $.ajax({
@@ -84,7 +86,7 @@ function loadPagination(totalRecord) {
         },
         prevText: '<i class="fas fa-chevron-left"></i>',
         nextText: '<i class="fas fa-chevron-right"></i>',
-        currentPage: 1
+        currentPage: num
     });
 }
 
@@ -101,10 +103,13 @@ function addData() {
         },
         dataType: 'json'
     }).then(res => {
-        $('#add-content').val('')
-        console.log(res.data[0].title);
-        $('#addEmployeeModal').modal('hide');
-        $('#content').append(`
+        if (res.status) {
+            alert('Guest can not add new record')
+        } else {
+            $('#add-content').val('')
+            console.log(res.data[0].title);
+            $('#addEmployeeModal').modal('hide');
+            $('#content').append(`
                     <tr id="${res.data[0]._id}">
                       
                         <td colspan="3" class="title">${res.data[0].title}</td>
@@ -117,6 +122,8 @@ function addData() {
                         </td>
                     </tr>
                 `)
+        }
+
     }).catch(err => console.log(err))
 
     $.ajax({

@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../model/dbConfig');
-// var d = new Date();
-// var date = d.toLocaleDateString().split('/');
-// var newDate = [date[1], date[0], date[2]];
+var d = new Date();
+var date = d.toLocaleDateString().split('/');
+var newDate = [date[1], date[0], date[2]];
 var middlewareLogin = require('../middlewares/checkLogin');
 
 // router.use(middlewareLogin.checkLogin)
@@ -48,24 +48,32 @@ router.get('/get/count', (req, res, next) => {
 })
 
 router.post('/', middlewareLogin.checkLogin, (req, res, next) => {
-    let title = req.body.title;
-    db.create({
-        title: title,
-        createdAt: d.toLocaleTimeString() + ' ' + newDate.join('/')
-    })
-        .then(data => {
-            db.find({
-                _id: data._id
-            }).then(result => {
-                res.json({
-                    message: 'Add data success',
-                    data: result
-                })
-            })
-
-        }).catch(err => {
-            console.log(err);
+    if (res.locals === 1 || res.locals === 3) {
+        let title = req.body.title;
+        db.create({
+            title: title,
+            createdAt: d.toLocaleTimeString() + ' ' + newDate.join('/')
         })
+            .then(data => {
+                console.log(data);
+                db.find({
+                    _id: data._id
+                }).then(result => {
+                    res.json({
+                        message: 'Add data success',
+                        data: result
+                    })
+                })
+
+            }).catch(err => {
+                console.log(err);
+            })
+    } else {
+        res.json({
+            status: 'can not add',
+            message: 'Guest can not add record'
+        })
+    }
 })
 
 router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
@@ -120,12 +128,12 @@ router.delete('/:id', middlewareLogin.checkLogin, (req, res, next) => {
         })
     } else if (res.locals === 3) {
         res.json({
-            status: 'can not edit',
+            status: 'can not delete',
             message: 'Nomal user can not edit this record'
         })
-    } else if (res.locals === 0){
+    } else if (res.locals === 0) {
         res.json({
-            status: 'can not edit',
+            status: 'can not delete',
             message: 'Guest can not edit this record'
         })
     }
