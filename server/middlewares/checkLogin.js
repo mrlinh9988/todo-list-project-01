@@ -18,7 +18,7 @@ function checkLogin(req, res, next) {
                         })
                         console.log('wrong token');
                     } else {
-                        res.locals = result[0].type;
+                        res.locals.type = result[0].type;
                         next();
                     }
                 })
@@ -28,8 +28,8 @@ function checkLogin(req, res, next) {
         });
 
     } else {
-        res.locals = 0;
-        res.sendFile(path.join(__dirname, '../public/html/index2.html'))
+        res.locals.type = 0;
+        // res.sendFile(path.join(__dirname, '../public/html/index2.html'))
         next();
     }
     // console.log('cookie token: ', token);

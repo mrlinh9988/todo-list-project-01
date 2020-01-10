@@ -63,7 +63,7 @@ server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
     // console.log('res.locals: ', res.locals);
     // res.sendFile(path.join(__dirname, '/public/html/index2.html'))
 
-    if (res.locals === 1 || res.locals === 3 || res.locals === 0) {
+    if (res.locals.type === 1 || res.locals.type === 3 || res.locals.type === 0) {
         res.sendFile(path.join(__dirname, '/public/html/index2.html'))
         
     }

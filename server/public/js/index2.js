@@ -19,12 +19,22 @@ function getArrCookie() {
     })
 }
 
+function deleteCookie(key){
+    return document.cookie = `${key}=;`;
+}
+
 // ==============================================================================
 // PAGINATION
-
+// Button Login
 $('#btn-login').click(function () {
     window.location.href = '/login'
 });
+
+// Button logout
+$('#btn-logout').click(function(){
+    deleteCookie('token');
+    document.location.href = '/'
+})
 
 
 
