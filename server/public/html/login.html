@@ -72,10 +72,9 @@
 	</div>
 </body>
 <script>
-	getArrCookie()
 
 	function getArrCookie() {
-		let arrCookie = document.cookie.split(';')
+		let arrCookie = document.cookie.split('; ')
 		return arrCookie.map(function (e) {
 			let cookie = e.split('=');
 			return {
@@ -118,22 +117,15 @@
 			data: data,
 			dataType: 'json'
 		}).then(res => {
-			// console.log(res);
-			if (res.status === 200) {
-				setCookie('token', res.token)
-				window.location.href = 'http://localhost:3000/'
-			} else {
-				alert('Login fail!')
-				console.log('fail');
-			}
-
+			setCookie('token', res)
+			window.location.href = 'http://localhost:3000/';
 		}).catch(err => console.log(err))
 	})
 
 
 	// setCookie('linh', 'deptrai', 1)
 	// console.log(getArrCookie());
-	console.log(cookie(' token'));
+	console.log(cookie('token'));
 	// console.log(cookie("SL_G_WPT_TO"));
 </script>
 

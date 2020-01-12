@@ -19,7 +19,7 @@ function getArrCookie() {
     })
 }
 
-function deleteCookie(key){
+function deleteCookie(key) {
     return document.cookie = `${key}=;`;
 }
 
@@ -31,7 +31,7 @@ $('#btn-login').click(function () {
 });
 
 // Button logout
-$('#btn-logout').click(function(){
+$('#btn-logout').click(function () {
     deleteCookie('token');
     document.location.href = '/'
 })
@@ -193,6 +193,7 @@ function deleteData(target, id) {
             } else {
                 $(target).parent().parent().remove();
                 $('#deleteEmployeeModal').modal('hide');
+                
             }
 
         }).catch(err => console.log(err))

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../model/dbConfig');
+var db = require('../model/productModel');
 var d = new Date();
 var date = d.toLocaleDateString().split('/');
 var newDate = [date[1], date[0], date[2]];
@@ -44,11 +44,11 @@ router.get('/get/count', (req, res, next) => {
             res.json(total)
         }).catch(err => {
             console.log(err);
-        })
+        }) 
 })
 
 router.post('/', middlewareLogin.checkLogin, (req, res, next) => {
-    if (res.locals.type === 1 || res.locals.type === 3) {
+    if (res.locals === 1 || res.locals === 3) {
         let title = req.body.title;
         db.create({
             title: title,
@@ -78,7 +78,7 @@ router.post('/', middlewareLogin.checkLogin, (req, res, next) => {
 
 router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
     console.log('res.locals: ', res.locals);
-    if (res.locals.type === 1) {
+    if (res.locals === 1) {
         let id = req.params.id;
         let title = req.body.title;
         db.findByIdAndUpdate(
@@ -98,7 +98,7 @@ router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
             }).catch(err => {
                 console.log(err);
             })
-    } else if (res.locals.type === 3) {
+    } else if (res.locals === 3) {
         res.json({
             status: 'can not edit',
             message: 'Nomal user can not edit this record'
@@ -114,7 +114,7 @@ router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
 
 router.delete('/:id', middlewareLogin.checkLogin, (req, res, next) => {
     console.log(res.locals);
-    if (res.locals.type === 1) {
+    if (res.locals === 1) {
         let id = req.params.id;
         console.log(id);
         db.deleteOne({
@@ -126,12 +126,12 @@ router.delete('/:id', middlewareLogin.checkLogin, (req, res, next) => {
         }).catch(err => {
             console.log(err);
         })
-    } else if (res.locals.type === 3) {
+    } else if (res.locals === 3) {
         res.json({
             status: 'can not delete',
             message: 'Nomal user can not edit this record'
         })
-    } else if (res.locals.type === 0) {
+    } else if (res.locals === 0) {
         res.json({
             status: 'can not delete',
             message: 'Guest can not edit this record'

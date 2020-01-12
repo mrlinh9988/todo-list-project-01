@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test-01', { useNewUrlParser: true, useUnifiedTopology: true });
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost:27017/test-01', { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoose = require('../config/dbConnect');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
@@ -16,7 +17,7 @@ var UserSchema = new Schema({
 });
 
 
-var User = mongoose.model('user', UserSchema);
+var UserModel = mongoose.model('user', UserSchema);
 
 // User.create({
 //     username: 'linh',
@@ -25,12 +26,10 @@ var User = mongoose.model('user', UserSchema);
 //     console.log('Create success');
 // })
 
-function auth(username, password) {
-    return User.find({
-        $and : [{ username: username }, { password: password }]
-    });
-}
+// function auth(username, password) {
+//     return User.find({
+//         $and : [{ username: username }, { password: password }]
+//     });
+// }
 
-module.exports = {
-    auth
-}
+module.exports = UserModel;

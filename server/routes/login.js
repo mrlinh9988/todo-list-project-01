@@ -12,43 +12,19 @@ router.post('/', (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    userModel.auth(username, password)
-        .then(result => {
-            // console.log('user: ',result[0]);
+    userModel.find({
+        username: username,
+        password: password
+    }).then(result => {
+        // console.log('user: ', result[0]);
+        var token = jwt.sign({ data: result[0] }, 'linh', { expiresIn: "1 days" });
+        res.json(token);
 
-            if (result.length === 0) {
-                // res.json({
-                //     status: 400,
-                //     message: 'Login fail'
-                // })
-                // next('err');
-                res.json({
-                    status: 400,
-                    message: 'Login fail'
-                })
-            } else {
-                let data = {
-                    username: result[0].username,
-                    password: result[0].password,
-                    type: result[0].type
-                }
+        // console.log('token: ', token);
 
-                jwt.sign(data, 'linh', { expiresIn: "1 days" }, (err, token) => {
-                    res.json({
-                        status: 200,
-                        token: token
-                    })
-                })
-
-                // res.json({
-                //     status: 200,
-                //     message: 'Login success'
-                // })
-            }
-        })
-        .catch(err => {
-            console.log('fail');
-        })
+    }).catch(err => {
+        console.log('fail');
+    })
 })
 
 module.exports = router;

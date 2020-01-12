@@ -9,12 +9,16 @@ var productRoute = require('./routes/product');
 var loginRoute = require('./routes/login')
 var jwt = require('jsonwebtoken');
 var logInMiddleware = require('./middlewares/checkLogin')
+var signupRoute = require('./routes/signup');
+var adminMiddleware = require('./middlewares/checkAdmin')
+var userMiddleware = require('./middlewares/checkUser')
 
 server.use(cookieParser())
 server.use('/public', express.static(path.join(__dirname, '/public')))
 server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/product', productRoute);
+server.use('/signup', signupRoute);
 
 server.use((err, req, res, next) => {
     res.json({
@@ -61,12 +65,13 @@ server.get('/contact', (req, res, next) => {
 
 server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
     // console.log('res.locals: ', res.locals);
-    // res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+    res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+    // console.log('type: ', res.locals);
 
-    if (res.locals.type === 1 || res.locals.type === 3 || res.locals.type === 0) {
-        res.sendFile(path.join(__dirname, '/public/html/index2.html'))
-        
-    }
+    // if (res.locals === 1 || res.locals === 3 || res.locals === 0) {
+    //     res.sendFile(path.join(__dirname, '/public/html/index2.html'))
+
+    // }
     // console.log(req.cookies.token);
 
 
