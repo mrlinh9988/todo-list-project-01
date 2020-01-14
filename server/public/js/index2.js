@@ -132,6 +132,15 @@ function addData() {
                         </td>
                     </tr>
                 `)
+
+            // $.ajax({
+            //     url: '/api/product/get/count',
+            //     method: 'get'
+            // }).then(totalRecord => {
+            //     console.log(totalRecord);
+            //     loadPagination(totalRecord)
+            //     loadPage(num + 1)
+            // })
         }
 
     }).catch(err => console.log(err))
@@ -140,7 +149,23 @@ function addData() {
         url: '/api/product/get/count',
         method: 'get'
     }).then(totalRecord => {
-        loadPagination(totalRecord)
+
+        // loadPagination(totalRecord)
+        $('#paging').pagination({
+            items: totalRecord,
+            itemsOnPage: 10,
+            cssStyle: 'light-theme',
+            onPageClick: function (pageNumber, event) {
+                loadPage(pageNumber);
+            },
+            onInit: function () {
+
+            },
+            prevText: '<i class="fas fa-chevron-left"></i>',
+            nextText: '<i class="fas fa-chevron-right"></i>',
+            currentPage: num + 1
+        });
+        loadPage(num + 1)
     })
 
     // $('#btn-submit-add').off('click').on('click', function () {
@@ -193,7 +218,34 @@ function deleteData(target, id) {
             } else {
                 $(target).parent().parent().remove();
                 $('#deleteEmployeeModal').modal('hide');
-                
+
+                let numberItemsPerPage = $('#content tr').length
+                if (numberItemsPerPage === 0) {
+                    $.ajax({
+                        url: '/api/product/get/count',
+                        method: 'get'
+                    }).then(totalRecord => {
+                        console.log('page num: ', num);
+                        // console.log(totalRecord);
+                        // loadPagination(totalRecord)
+                        $('#paging').pagination({
+                            items: totalRecord,
+                            itemsOnPage: 10,
+                            cssStyle: 'light-theme',
+                            onPageClick: function (pageNumber, event) {
+                                loadPage(pageNumber);
+                            },
+                            onInit: function () {
+
+                            },
+                            prevText: '<i class="fas fa-chevron-left"></i>',
+                            nextText: '<i class="fas fa-chevron-right"></i>',
+                            currentPage: num - 1
+                        });
+                        loadPage(num - 1)
+                        // loadPage(num - 1)
+                    })
+                }
             }
 
         }).catch(err => console.log(err))

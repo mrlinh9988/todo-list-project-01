@@ -2,7 +2,11 @@ let jwt = require('jsonwebtoken');
 
 function checkLogin(req, res, next) {
     // let token = req.body.token;
-    let token = req.cookies.token;
+     let headers = req.headers.authorization.split(' ');
+
+    let token = headers[1];
+    // let token = req.cookies.token
+    console.log('token1: ', token);
 
     if (token) {
 

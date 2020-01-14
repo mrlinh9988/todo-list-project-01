@@ -5,7 +5,7 @@ var path = require('path')
 var jwt = require('jsonwebtoken');
 
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../public/html/login.html'))
+    res.sendFile(path.join(__dirname, '../public/html/signin.html'))
 })
 
 router.post('/', (req, res, next) => {

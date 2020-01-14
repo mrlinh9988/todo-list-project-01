@@ -6,7 +6,7 @@ const fs = require('fs');
 var port = process.env.PORT || 3000;
 var cookieParser = require('cookie-parser')
 var productRoute = require('./routes/product');
-var loginRoute = require('./routes/login')
+var loginRoute = require('./routes/signin')
 var jwt = require('jsonwebtoken');
 var logInMiddleware = require('./middlewares/checkLogin')
 var signupRoute = require('./routes/signup');
@@ -27,7 +27,7 @@ server.use((err, req, res, next) => {
 })
 
 
-server.use('/login', loginRoute)
+server.use('/signin', loginRoute)
 
 server.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -75,6 +75,32 @@ server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
     // console.log(req.cookies.token);
 
 
+})
+
+server.get('/api/user', (req, res, next) => {
+    // let headers = req.headers.authorization.split(' ');
+    let headers = req.headers.authorization.split(' ');
+
+    let token = headers[1] || req.cookies.token || req.params.token;
+
+    // var token = req.params
+    console.log('token1: ', req.params.token);
+
+
+    // cách 1: Dùng res.locals
+    jwt.verify(token, 'linh', function (err, data) {
+        console.log('decoded: ', data);
+        if (err) {
+            res.json('token khong hop le')
+        }
+
+        res.data = data;
+        next()
+    });
+
+
+}, (req, res, next) => {
+    res.json(res.data)
 })
 
 // server.post('/', (req, res, next) => {
