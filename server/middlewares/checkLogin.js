@@ -2,11 +2,10 @@ let jwt = require('jsonwebtoken');
 
 function checkLogin(req, res, next) {
     // let token = req.body.token;
-     let headers = req.headers.authorization.split(' ');
+    //  let headers = req.headers.authorization.split(' ');
 
-    let token = headers[1];
-    // let token = req.cookies.token
-    console.log('token1: ', token);
+    // let token = headers[1];
+    let token = req.cookies.token
 
     if (token) {
 
@@ -14,19 +13,19 @@ function checkLogin(req, res, next) {
         jwt.verify(token, 'linh', function (err, decoded) {
             console.log('decoded: ', decoded.data);
             let type = decoded.data.type;
-            if (type === 1) {
-                res.locals = 1;
-                next();
-            } else if (type === 3) {
-                res.locals = 3;
-                next();
-            }
+            // if (type === 1) {
+            //     res.locals = 1;
+            //     next();
+            // } else if (type === 3) {
+            //     res.locals = 3;
+            //     next();
+            // }
+            res.locals = type;
+            next()
         });
 
     } else {
-        res.locals = 0;
-
-        next();
+        res.json('No token found')
     }
 
 }

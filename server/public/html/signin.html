@@ -119,19 +119,17 @@
 		}).then(res => {
 			console.log('token: ', res);
 
-			$.ajax({
-				url: '/',
-				method: 'get',
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader("Authorization", "Bearer " + res);
-				}
-			}).then(data => {
-				
-			}).catch(err => console.log(err))
-			// setCookie('token', res
+			// $.ajax({
+			// 	url: '/',
+			// 	method: 'get',
+			// 	beforeSend: function (xhr) {
+			// 		xhr.setRequestHeader("Authorization", "Bearer " + res);
+			// 	}
+			// }).then(data => {
 
-			// )
-			// window.location.href = 'http://localhost:3000/';
+			// }).catch(err => console.log(err))
+			setCookie('token', res)
+			window.location.href = 'http://localhost:3000/';
 		}).catch(err => console.log(err))
 	})
 
