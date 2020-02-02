@@ -5,8 +5,10 @@ var path = require('path')
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 
+
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../public/html/signin.html'))
+    res.render('signin', { title: 'Sign In' })
+    // res.sendFile(path.join(__dirname, '../public/html/signin.html'))
 })
 
 router.post('/', (req, res, next) => {
@@ -16,11 +18,10 @@ router.post('/', (req, res, next) => {
     userModel.find({
         username: username
     }).then(result => {
-        console.log('result: ', result);
 
         bcrypt.compare(password, result[0].password).then(function (status) {
             if (status) {
-                var token = jwt.sign({ data: result[0] }, 'linh', { expiresIn: "1 days" });
+                var token = jwt.sign({ data: result[0] }, 'linh', { expiresIn: "1h" });
                 res.json(token);
             } else {
                 res.json('Wrong password')

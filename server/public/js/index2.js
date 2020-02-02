@@ -27,7 +27,7 @@ function deleteCookie(key) {
 // PAGINATION
 // Button Login
 $('#btn-login').click(function () {
-    window.location.href = '/login'
+    window.location.href = '/signin'
 });
 
 // Button logout
@@ -124,10 +124,9 @@ function addData() {
                       
                         <td colspan="3" class="title">${res.data[0].title}</td>
                         <td colspan="2" >
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="updateData(this, '${res.data[0]._id}', '${res.data[0].title}')"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit" name="edit">&#xE254;</i></a>
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="updateData(this, '${res.data[0]._id}', '${res.data[0].title}')"><i           class="material-icons" data-toggle="tooltip" title="Edit" name="edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="deleteData('${res.data[0]._id}')" ><i class="material-icons"
-                                data-toggle="tooltip" name="detail">&#xE872;</i></a>
+                                    data-toggle="tooltip" name="detail">&#xE872;</i></a>
                             <a href="#detailEmployeeModal" data-toggle="modal" onclick="detailData('${res.data[0]._id}')" ><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>

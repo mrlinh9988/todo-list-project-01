@@ -3,8 +3,9 @@ const router = express.Router();
 const UserModel = require('../model/userModel');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-router.get('/', (req, res, next) => {
 
+router.get('/', (req, res, next) => {
+    res.render('signup', { title: 'Sign up' })
 })
 
 router.post('/', (req, res, next) => {

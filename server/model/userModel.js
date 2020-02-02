@@ -8,7 +8,7 @@ var UserSchema = new Schema({
     password: String,
     type: {
         type: Number,
-        default: 3
+        default: 1
     }
 
 }, {
