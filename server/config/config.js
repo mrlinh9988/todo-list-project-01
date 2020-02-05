@@ -3,5 +3,6 @@ module.exports = {
     password: "deobiet12",
     accessToken: 'linh',
     refreshToken: 'refresh_token',
-    verify: "verify"
+    verify: "verify",
+    forget: 'forget'
 }

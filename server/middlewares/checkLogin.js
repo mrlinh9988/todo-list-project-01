@@ -4,7 +4,9 @@ const User = require('../model/userModel');
 
 const auth = {
     async checkLogin(req, res, next) {
-        let token = req.headers['authorization'].split(' ')[1];
+        let token = req.headers['Authorization'].split(' ')[1];
+
+        console.log(req.headers);
 
         if (!token) {
             return res.status(401).send({

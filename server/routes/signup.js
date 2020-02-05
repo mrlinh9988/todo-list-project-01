@@ -74,10 +74,10 @@ router.post('/', async (req, res, next) => {
                     return console.log(error);
                 }
 
-                console.log('message sent: %s', info.respone);
+                console.log('message sent: %s', info.messageId);
 
             });
-            
+
         });
 
     } catch (error) {

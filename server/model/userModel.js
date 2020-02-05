@@ -8,13 +8,12 @@ var UserSchema = new Schema({
     password: String,
     type: {
         type: Number,
-        default: 1
+        default: 3
     },
     isVerify: {
         type: String,
         default: null
     }
-
 }, {
 
     collection: 'user'

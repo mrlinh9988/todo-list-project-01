@@ -13,6 +13,8 @@ var signupRoute = require('./routes/signup');
 var logoutRoute = require('./routes/logout');
 var refreshTokenRoute = require('./routes/refresh');
 var forgetPasswordRoute = require('./routes/forgetPassword');
+var verifyEmailRoute = require('./routes/verify');
+var changePassRoute = require('./routes/changePassword');
 var cors = require('cors');
 
 server.set('views', path.join(__dirname, 'views'));
@@ -27,6 +29,8 @@ server.use('/signup', signupRoute);
 server.use('/logout', logoutRoute);
 server.use('/refreshToken', refreshTokenRoute);
 server.use('/forget', forgetPasswordRoute);
+server.use('/verify', verifyEmailRoute);
+server.use('/change_password', changePassRoute);
 
 
 server.use((err, req, res, next) => {
