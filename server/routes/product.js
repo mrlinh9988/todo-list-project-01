@@ -6,9 +6,12 @@ var date = d.toLocaleDateString().split('/');
 var newDate = [date[1], date[0], date[2]];
 var middlewareLogin = require('../middlewares/checkLogin');
 
+router.use(middlewareLogin.checkLogin)
+
 // router.use(middlewareLogin.checkLogin)
 
 router.get('/', (req, res, next) => {
+
     var page = parseInt(req.query.page);
     var start = (page - 1) * 10;
     db.find()
@@ -44,10 +47,10 @@ router.get('/get/count', (req, res, next) => {
             res.json(total)
         }).catch(err => {
             console.log(err);
-        }) 
+        })
 })
 
-router.post('/', middlewareLogin.checkLogin, (req, res, next) => {
+router.post('/', (req, res, next) => {
     if (res.locals === 1 || res.locals === 3) {
         let title = req.body.title;
         db.create({
@@ -76,11 +79,14 @@ router.post('/', middlewareLogin.checkLogin, (req, res, next) => {
     }
 })
 
-router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
+router.put('/:id', (req, res, next) => {
+    let token = localStorage.getItem('token');
+    console.log(token);
     console.log('res.locals: ', res.locals);
     if (res.locals === 1) {
         let id = req.params.id;
         let title = req.body.title;
+
         db.findByIdAndUpdate(
             id,
             {
@@ -112,7 +118,7 @@ router.put('/:id', middlewareLogin.checkLogin, (req, res, next) => {
 
 })
 
-router.delete('/:id', middlewareLogin.checkLogin, (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     console.log(res.locals);
     if (res.locals === 1) {
         let id = req.params.id;
@@ -129,12 +135,12 @@ router.delete('/:id', middlewareLogin.checkLogin, (req, res, next) => {
     } else if (res.locals === 3) {
         res.json({
             status: 'can not delete',
-            message: 'Nomal user can not edit this record'
+            message: 'Nomal user can not delete this record'
         })
     } else if (res.locals === 0) {
         res.json({
             status: 'can not delete',
-            message: 'Guest can not edit this record'
+            message: 'Guest can not delete this record'
         })
     }
 

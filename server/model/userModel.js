@@ -4,11 +4,15 @@ const mongoose = require('../config/dbConnect');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    username: String,
+    email: String,
     password: String,
     type: {
         type: Number,
         default: 1
+    },
+    isVerify: {
+        type: String,
+        default: null
     }
 
 }, {

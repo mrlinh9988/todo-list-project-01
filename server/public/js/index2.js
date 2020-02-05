@@ -8,6 +8,15 @@
 // console.log(getArrCookie());
 // getArrCookie().pop()
 
+
+let token = localStorage.getItem('token');
+console.log(token);
+
+
+// let headers = new Headers();
+// headers.append('Authentication', `Bearer ${token}`);
+// console.log(headers);
+
 function getArrCookie() {
     let arrCookie = document.cookie.split('; ')
     return arrCookie.map(function (e) {
@@ -32,8 +41,15 @@ $('#btn-login').click(function () {
 
 // Button logout
 $('#btn-logout').click(function () {
-    deleteCookie('token');
-    document.location.href = '/'
+    // deleteCookie('token');
+    $.ajax({
+        url: '/logout',
+        method: 'get'
+    }).then(result => {
+        window.location.href = '/signin'
+        // console.log(result);
+    }).catch(err => console.log(err))
+
 })
 
 
@@ -176,6 +192,7 @@ function addData() {
 
 
 function updateData(target, id, title) {
+
     //$('#updateModalLabel').html('Id: ' + id)
     title = $('#' + id).find('.title').html();
     // console.log(title);
@@ -191,7 +208,8 @@ function updateData(target, id, title) {
             data: {
                 title: $('#update-content').val()
             },
-            dataType: 'json'
+            dataType: 'json',
+
         }).then(res => {
             if (res.status) {
                 alert(res.message)
