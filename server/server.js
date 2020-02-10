@@ -15,7 +15,10 @@ var refreshTokenRoute = require('./routes/refresh');
 var forgetPasswordRoute = require('./routes/forgetPassword');
 var verifyEmailRoute = require('./routes/verify');
 var changePassRoute = require('./routes/changePassword');
+var userRoute = require('./routes/user');
 var cors = require('cors');
+
+require('./services/cache');
 
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
@@ -31,6 +34,7 @@ server.use('/refreshToken', refreshTokenRoute);
 server.use('/forget', forgetPasswordRoute);
 server.use('/verify', verifyEmailRoute);
 server.use('/change_password', changePassRoute);
+server.use('/users', userRoute);
 
 
 server.use((err, req, res, next) => {
@@ -53,6 +57,11 @@ server.use(cors())
 
 server.get('/', logInMiddleware.checkLogin, (req, res, next) => {
     res.render('index', { type: res.locals, a: 'linh' })
+})
+
+
+server.get('/users', (req, res, next) => {
+
 })
 
 

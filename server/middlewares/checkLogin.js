@@ -4,15 +4,14 @@ const User = require('../model/userModel');
 
 const auth = {
     async checkLogin(req, res, next) {
-        let token = req.headers['Authorization'].split(' ')[1];
 
-        console.log(req.headers);
-
-        if (!token) {
+        if (!req.headers['authorization']) {
             return res.status(401).send({
                 error: 'You need to Login',
             });
         }
+
+        let token = req.headers['authorization'].split(' ')[1];
 
         try {
 
@@ -40,9 +39,40 @@ const auth = {
 
             next();
         } catch (error) {
-            return res.status(501).json({
-                error: error.toString(),
-            });
+            console.log(error);
+
+            if (error.name === 'TokenExpiredError') {
+                const refreshToken = req.query.refreshToken;
+
+                if (!refreshToken) {
+                    res.json({
+                        message: 'You need provide refresh token to renew access token'
+                    })
+                } else {
+                    try {
+                        const newAcessToken = await jwt.verify(refreshToken, 'refresh_token');
+
+                        const user = await User.findById(newAcessToken.data._id);
+
+                        let data = {
+                            _id: user._id,
+                            type: user.type
+                        }
+
+                        if (user) {
+                            const accessToken = jwt.sign({ data }, 'linh', { expiresIn: '60s' });
+
+                            res.json({
+                                newAccessToken: accessToken
+                            })
+                        }
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+
+
+            }
         }
     }
 }

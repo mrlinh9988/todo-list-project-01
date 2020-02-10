@@ -13,6 +13,10 @@ var UserSchema = new Schema({
     isVerify: {
         type: String,
         default: null
+    },
+    products: {
+        type: [ String ],
+    
     }
 }, {
 

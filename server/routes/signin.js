@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
         bcrypt.compare(password, result[0].password).then(async function (status) {
             if (status) {
                 // create access token
-                let token = jwt.sign({ data }, 'linh', { expiresIn: "1h" });
+                let token = jwt.sign({ data }, 'linh', { expiresIn: "60s" });
 
                 // create refresh token
                 let refreshToken = jwt.sign({ data: idUser }, 'refresh_token', { expiresIn: '10d' });

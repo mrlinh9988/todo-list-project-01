@@ -59,14 +59,13 @@ router.post('/', (req, res, next) => {
         })
             .then(data => {
                 console.log(data);
-                db.find({
-                    _id: data._id
-                }).then(result => {
-                    res.json({
-                        message: 'Add data success',
-                        data: result
+                db.findById(data._id)
+                        .then(result => {
+                        res.json({
+                            message: 'Add data success',
+                            data: result
+                        })
                     })
-                })
 
             }).catch(err => {
                 console.log(err);
@@ -83,7 +82,7 @@ router.put('/:id', (req, res, next) => {
     let token = localStorage.getItem('token');
     console.log(token);
     console.log('res.locals: ', res.locals);
-    if (res.locals === 1) {
+    if (res.locals === 1 || res.locals === 3) {
         let id = req.params.id;
         let title = req.body.title;
 
@@ -122,7 +121,7 @@ router.delete('/:id', (req, res, next) => {
     console.log(res.locals);
     if (res.locals === 1) {
         let id = req.params.id;
-        console.log(id);
+        // console.log(id);
         db.deleteOne({
             _id: id
         }).then(data => {
