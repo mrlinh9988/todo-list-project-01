@@ -9,7 +9,9 @@ client.get = util.promisify(client.get);
 
 router.get('/', async (req, res) => {
 
-    const users = await User.find({});
+    const users = await User
+        .find({})
+        .cache('');
 
     res.send(users);
 
@@ -17,7 +19,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    const user = await User.findById(req.params.id);
+    const user = await User
+        .findById(req.params.id)
+        .cache({ key: req.params.id });
 
     res.send(user)
 
